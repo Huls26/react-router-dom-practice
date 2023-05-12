@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello Vite + React!</p>
+        <p className="text-3xl">Hello Vite + React!</p>
         <p>
           <button
             type="button"
