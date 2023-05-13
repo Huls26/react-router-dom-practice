@@ -30,6 +30,7 @@ module.exports = {
     // 'linebreak-style': ['error', 'window'],
     'linebreak-style': 0,
     'import/extensions': 0,
+    'import/no-extraneous-dependencies': 0,
   },
   ignorePatterns: ['test-utils.tsx'],
   settings: {
