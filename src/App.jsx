@@ -4,18 +4,24 @@ import {
   // Link,
 } from 'react-router-dom';
 
-import Header from './features/Header';
-// import MainPage from './pages/MainPage';
-import AboutPage from './pages/AboutPage';
+import AboutPage from '@pages/AboutPage';
+import MainPage from '@pages/MainPage';
+import HomePage from '@pages/HomePage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Header />,
-  },
-  {
-    path: '/about',
-    element: <AboutPage />,
+    element: <MainPage />,
+    children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
+      {
+        path: '/about',
+        element: <AboutPage />,
+      },
+    ],
   },
 ]);
 

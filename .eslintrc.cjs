@@ -31,6 +31,8 @@ module.exports = {
     'linebreak-style': 0,
     'import/extensions': 0,
     'import/no-extraneous-dependencies': 0,
+    'import/no-unresolved': 0,
+    'max-len': ['error', { ignoreUrls: true }, { ignoreStrings: true }],
   },
   ignorePatterns: ['test-utils.tsx'],
   settings: {

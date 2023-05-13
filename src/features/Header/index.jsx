@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <header className="flex items-center justify-between
-    px-4 py-7
+    px-6 py-7
     bg-primary-1
     "
     >
