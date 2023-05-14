@@ -1,7 +1,7 @@
 export default function AboutPage() {
   return (
     <section className="bg-primary-1 font-inter text-dark-2 pb-16">
-      <div className="bg-img-about bg-center bg-no-repeat bg-cover w-full h-56 mb-12" />
+      <div className="about-hero-img bg-cover w-full h-56 mb-12" />
       <div className="px-6 cursor-pointer">
         <h1 className="font-bold text-4xl mb-8">Don’t squeeze in a sedan when you could relax in a van.</h1>
         <p className="font-medium text-base mb-3">

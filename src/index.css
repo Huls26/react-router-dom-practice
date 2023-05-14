@@ -21,3 +21,17 @@ li, #logo-home {
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
+
+.home-hero-img {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)), url("./assets/bg-picture/hero-menu.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.about-hero-img {
+  background: url("./assets/bg-picture/image-about.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

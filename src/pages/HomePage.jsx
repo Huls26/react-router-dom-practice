@@ -1,7 +1,8 @@
 export default function HomePage() {
+  // bg-hero-menu bg-center bg-no-repeat bg-cover
   return (
     <main className="
-    bg-hero-menu bg-center bg-no-repeat bg-cover
+    home-hero-img
     text-inter text-white
     px-6 py-16
     "
