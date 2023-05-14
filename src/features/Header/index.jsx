@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
   return (
     <header className="flex items-center justify-between
@@ -5,7 +7,15 @@ export default function Header() {
     bg-primary-1
     "
     >
-      <h1 className="font-inter font-black text-[1.5em] text-black">#VANLIFE</h1>
+      <h1
+        className="
+              font-inter font-black text-[1.5em] text-black
+              hover:text-dark-1
+              cursor-pointer"
+        id="logo-home"
+      >
+        <Link to="/">#VANLIFE</Link>
+      </h1>
 
       <nav>
         <ul className="
@@ -13,8 +23,8 @@ export default function Header() {
         flex space-x-6
         "
         >
-          <li>About</li>
-          <li>Vans</li>
+          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer"><Link to="/about">About</Link></li>
+          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">Vans</li>
         </ul>
       </nav>
     </header>
