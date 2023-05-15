@@ -23,8 +23,12 @@ export default function Header() {
         flex space-x-6
         "
         >
-          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer"><Link to="/about">About</Link></li>
-          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">Vans</li>
+          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
+            <Link to="/about">About</Link>
+          </li>
+          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
+            <Link to="/vans">Vans</Link>
+          </li>
         </ul>
       </nav>
     </header>
