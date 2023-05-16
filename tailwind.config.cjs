@@ -18,6 +18,9 @@ module.exports = {
     colors: {
       'primary-1': '#FFF7ED',
       'secondary-1': '#4D4D4D',
+      simpleBg: '#E17654',
+      ruggedBg: '#115E59',
+      white: '#FFFFFF',
       btnBg: '#FFEAD0',
       article: '#FFCC8D',
       'dark-1': '#252525',
