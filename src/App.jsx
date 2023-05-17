@@ -8,6 +8,7 @@ import MainPage from '@pages/MainPage';
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
 import VansPage from './pages/VansPage';
+import VanDetails from './pages/VanDetails';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/vans',
         element: <VansPage />,
+      },
+      {
+        path: '/vans/:id',
+        element: <VanDetails />,
       },
     ],
   },

@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     screens: {
       sm: '480px',
-      md: '768px',
+      md: '548px',
       lg: '976px',
-      xl: '1440px',
+      xl: '1200px',
     },
     backgroundImage: {
       'hero-menu': "url('./src/assets/bg-picture/hero-menu.svg')",

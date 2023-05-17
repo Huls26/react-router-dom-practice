@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ProductVans from '@features/ProductVans';
 import BtnType from '@features/ProductVans/components/BtnType';
 
@@ -15,13 +16,16 @@ export default function VansPage() {
   const productList = vansList.map(({
     imageUrl, name, price, type, id,
   }) => (
-    <ProductVans
-      key={id}
-      img={imageUrl}
-      name={name}
-      price={price}
-      type={type}
-    />
+    <Link to={`/vans/${id}`} key={id}>
+      <ProductVans
+        img={imageUrl}
+        name={name}
+        price={price}
+        type={type}
+        id={id}
+      />
+    </Link>
+
   ));
 
   return (
@@ -37,9 +41,13 @@ export default function VansPage() {
         <button className="font-medium text-base text-dark-3 underline underline-offset-4" type="button">Clear filters</button>
       </div>
 
-      <div className="flex justify-center flex-wrap gap-8">
+      {
+      // flex justify-center flex-wrap gap-8
+      }
+      <div className="grid md:grid-cols-[230px_230px] lg:grid-cols-[230px_230px_230px] xl:grid-cols-[230px_230px_230px_230px] justify-center gap-8">
         {productList}
       </div>
+
     </section>
   );
 }

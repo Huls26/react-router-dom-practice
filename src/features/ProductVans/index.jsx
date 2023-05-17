@@ -1,7 +1,8 @@
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function ProductVans({
-  img, name, price, type,
+  img, name, price, type, // id,
 }) {
   let btnStyleBg = '';
 
@@ -20,6 +21,7 @@ export default function ProductVans({
                   text-btnBg ${btnStyleBg}
                   hover:opacity-80
               `;
+
   return (
     <article className="font-inter text-dark-2 md:w-56">
       <div className="w-full h-[350px] md:h-56 mb-2.5 rounded shadow-lg">
@@ -40,8 +42,10 @@ export default function ProductVans({
         className={btnStyles}
         type="button"
       >
+        {
+          // <Link to={`/vans/${id}`}>{type}</Link>
+        }
         {type}
-
       </button>
     </article>
   );
@@ -52,4 +56,5 @@ ProductVans.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  // id: PropTypes.string.isRequired,
 };
