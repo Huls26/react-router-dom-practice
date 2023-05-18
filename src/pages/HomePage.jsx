@@ -1,3 +1,5 @@
+import BtnOrange from '../components/BtnOrange';
+
 export default function HomePage() {
   // bg-hero-menu bg-center bg-no-repeat bg-cover
   return (
@@ -14,7 +16,7 @@ export default function HomePage() {
       <p className="mb-9 md:mb-14 max-w-md mx-auto">
         {' Add adventure to your life by joining the #vanlife movement. Rent the perfect van to make your perfect road trip.'}
       </p>
-      <button className="block text-white font-semibold bg-orange p-2.5 w-full max-w-md md:m-auto rounded hover:opacity-80" type="button">Find your van</button>
+      <BtnOrange name="find your van" />
     </main>
   );
 }

@@ -7,8 +7,8 @@ import {
 import MainPage from '@pages/MainPage';
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
-import VansPage from './pages/VansPage';
-import VanDetails from './pages/VanDetails';
+import VansPage from '@pages/VansPage';
+import VanDetailsPage from '@pages/VanDetailsPage';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/vans/:id',
-        element: <VanDetails />,
+        element: <VanDetailsPage />,
       },
     ],
   },

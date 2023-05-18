@@ -1,27 +1,10 @@
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import BtnTypeStyle from '@components/btnTypeStyle';
 
 export default function ProductVans({
   img, name, price, type, // id,
 }) {
-  let btnStyleBg = '';
-
-  if (type.toLowerCase() === 'simple') {
-    btnStyleBg = 'bg-simpleBg';
-  } else if (type.toLowerCase() === 'luxury') {
-    btnStyleBg = 'bg-dark-2';
-  } else {
-    btnStyleBg = 'bg-ruggedBg';
-  }
-
-  const btnStyles = `
-                  ont-inter text-base font-medium
-                  py-1.5 px-6
-                  capitalize rounded-md shadow
-                  text-btnBg ${btnStyleBg}
-                  hover:opacity-80
-              `;
-
   return (
     <article className="font-inter text-dark-2 md:w-56">
       <div className="w-full h-[350px] md:h-56 mb-2.5 rounded shadow-lg">
@@ -38,15 +21,7 @@ export default function ProductVans({
       </div>
       <span className="block text-right font-sm">/day</span>
 
-      <button
-        className={btnStyles}
-        type="button"
-      >
-        {
-          // <Link to={`/vans/${id}`}>{type}</Link>
-        }
-        {type}
-      </button>
+      <BtnTypeStyle type={type} />
     </article>
   );
 }
