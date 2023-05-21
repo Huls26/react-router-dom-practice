@@ -24,6 +24,9 @@ export default function Header() {
         "
         >
           <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
+            <Link to="/host">Host</Link>
+          </li>
+          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
             <Link to="/about">About</Link>
           </li>
           <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">

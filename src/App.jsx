@@ -9,6 +9,10 @@ import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
 import VansPage from '@pages/VansPage';
 import VanDetailsPage from '@pages/VanDetailsPage';
+import HostLayout from '@pages/Host/HostLayout';
+import Dashboard from '@pages/Host/Dashboard';
+import IncomePage from '@pages/Host/IncomePage';
+import ReviewPage from '@pages/Host/ReviewPage';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +22,24 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />,
+      },
+      {
+        path: '/host',
+        element: <HostLayout />,
+        children: [
+          {
+            path: '/host',
+            element: <Dashboard />,
+          },
+          {
+            path: '/host/income',
+            element: <IncomePage />,
+          },
+          {
+            path: '/host/reviews',
+            element: <ReviewPage />,
+          },
+        ],
       },
       {
         path: '/about',

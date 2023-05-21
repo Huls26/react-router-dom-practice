@@ -7,6 +7,5 @@ export default function BtnOrange({ name }) {
 }
 
 BtnOrange.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  name: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
 };
