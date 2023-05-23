@@ -15,6 +15,8 @@ import HostLayout from '@pages/Host/HostLayout';
 import Dashboard from '@pages/Host/Dashboard';
 import IncomePage from '@pages/Host/IncomePage';
 import ReviewPage from '@pages/Host/ReviewPage';
+import HostVansPage from '@pages/Host/HostVansPage';
+import HostVansDetail from '@pages/Host/HostVansDetail';
 
 // const router = createBrowserRouter([
 //   {
@@ -62,7 +64,6 @@ import ReviewPage from '@pages/Host/ReviewPage';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
-      path="/"
       element={<MainPage />}
     >
       <Route index element={<HomePage />} />
@@ -85,7 +86,10 @@ const router = createBrowserRouter(
       >
         <Route index element={<Dashboard />} />
         <Route path="income" element={<IncomePage />} />
+        <Route path="vans" element={<HostVansPage />} />
+        <Route path="vans/:id" element={<HostVansDetail />} />
         <Route path="reviews" element={<ReviewPage />} />
+
       </Route>
     </Route>,
   ),

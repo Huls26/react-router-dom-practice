@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function Header() {
+  const activeStyle = 'underline underline-offset-4 text-dark-2 cursor-pointer';
+  const hoverStyle = 'hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer';
   return (
     <header className="flex items-center justify-between
     px-6 py-7
@@ -14,7 +16,7 @@ export default function Header() {
               cursor-pointer"
         id="logo-home"
       >
-        <Link to="/">#VANLIFE</Link>
+        <NavLink to="/">#VANLIFE</NavLink>
       </h1>
 
       <nav>
@@ -23,14 +25,36 @@ export default function Header() {
         flex space-x-6
         "
         >
-          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
-            <Link to="/host">Host</Link>
+          <li>
+            <NavLink
+              to="/host"
+              className={
+                ({ isActive }) => (isActive ? activeStyle : hoverStyle)
+              }
+            >
+              Host
+
+            </NavLink>
           </li>
-          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
-            <Link to="/about">About</Link>
+          <li>
+            <NavLink
+              to="/about"
+              className={
+                ({ isActive }) => (isActive ? activeStyle : hoverStyle)
+              }
+            >
+              About
+            </NavLink>
           </li>
-          <li className="hover:underline hover:underline-offset-4 hover:text-dark-2 cursor-pointer">
-            <Link to="/vans">Vans</Link>
+          <li>
+            <NavLink
+              to="/vans"
+              className={
+                ({ isActive }) => (isActive ? activeStyle : hoverStyle)
+              }
+            >
+              Vans
+            </NavLink>
           </li>
         </ul>
       </nav>

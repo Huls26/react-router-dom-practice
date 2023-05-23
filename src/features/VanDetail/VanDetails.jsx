@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import arrow from '@assets/arrow-1.svg';
 
 import BtnTypeStyle from '@components/btnTypeStyle';
-import BtnOrange from '../../components/BtnOrange';
+import BtnOrange from '@components/BtnOrange';
+import BackArrow from '@components/BackArrow';
 
 export default function VanDetails({ info }) {
   const {
@@ -12,14 +11,7 @@ export default function VanDetails({ info }) {
 
   return (
     <section className="bg-white px-6 pt-10 pb-20">
-      <Link to="/vans">
-        <button className="flex space-x-2 items-center text-base font-medium font-inter text-dark-4 underline underline-offset-2 mb-10 hover:text-gray-1" type="button">
-          <div>
-            <img src={arrow} alt="arrow" />
-          </div>
-          <span>Back to all vans</span>
-        </button>
-      </Link>
+      <BackArrow />
 
       <div className="flex flex-col md:flex-row md:space-x-7">
         <div className="w-full h-1/2 mb-12 rounded md:basis-1/2">

@@ -13,6 +13,7 @@ export default function VansPage() {
       .then((res) => res.json())
       .then(({ vans }) => setVansList(() => [...vans]));
   }, []);
+
   const productList = vansList.map(({
     imageUrl, name, price, type, id,
   }) => (

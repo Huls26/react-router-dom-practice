@@ -8,6 +8,7 @@ export default function HostLayout() {
         <ul className="flex space-x-5">
           <BtnHostNav link="/host" navText="dashboard" />
           <BtnHostNav link="/host/income" navText="income" />
+          <BtnHostNav link="/host/vans" navText="vans" />
           <BtnHostNav link="/host/reviews" navText="reviews" />
         </ul>
       </nav>
