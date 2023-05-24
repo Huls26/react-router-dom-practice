@@ -13,7 +13,7 @@ export default function BtnHostNav({ link, navText }) {
     cursor: 'pointer',
   };
   return (
-    <li className="font-inter font-medium text-lg text-secondary-1 capitalize">
+    <li className="font-inter font-semibold text-lg text-secondary-1 capitalize">
       <NavLink
         to={link}
         // className={({ isActive }) => (isActive ? activeStyle : hoverStyle)}

@@ -11,7 +11,7 @@ export default function VanDetails({ info }) {
 
   return (
     <section className="bg-white px-6 pt-10 pb-20">
-      <BackArrow />
+      <BackArrow link="/vans" />
 
       <div className="flex flex-col md:flex-row md:space-x-7">
         <div className="w-full h-1/2 mb-12 rounded md:basis-1/2">

@@ -16,7 +16,11 @@ import Dashboard from '@pages/Host/Dashboard';
 import IncomePage from '@pages/Host/IncomePage';
 import ReviewPage from '@pages/Host/ReviewPage';
 import HostVansPage from '@pages/Host/HostVansPage';
-import HostVansDetail from '@pages/Host/HostVansDetail';
+import HostVansDetails from '@pages/Host/HostVansDetails';
+
+import HostVansDetailChild from './pages/Host/Vans/HostVansDetailChild';
+import HostVansPhotosChild from './pages/Host/Vans/HostVansPhotosChild';
+import HostVansPricingChild from './pages/Host/Vans/HostVansPricingChild';
 
 // const router = createBrowserRouter([
 //   {
@@ -87,7 +91,11 @@ const router = createBrowserRouter(
         <Route index element={<Dashboard />} />
         <Route path="income" element={<IncomePage />} />
         <Route path="vans" element={<HostVansPage />} />
-        <Route path="vans/:id" element={<HostVansDetail />} />
+        <Route path="vans/:id" element={<HostVansDetails />}>
+          <Route index element={<HostVansDetailChild />} />
+          <Route path="pricing" element={<HostVansPricingChild />} />
+          <Route path="photos" element={<HostVansPhotosChild />} />
+        </Route>
         <Route path="reviews" element={<ReviewPage />} />
 
       </Route>

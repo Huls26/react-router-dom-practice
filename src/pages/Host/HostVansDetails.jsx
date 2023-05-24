@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import HostVansDetailArticle from '@features/HostVansDetailArticle';
 
-export default function HostVansDetail() {
+export default function HostVansDetails() {
   const [hostVansDetail, setHostVansDetail] = useState(() => []);
   const { id } = useParams();
 
@@ -20,6 +20,7 @@ export default function HostVansDetail() {
       img="https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png"
       name="Modex X"
       price={69}
+      id={1}
     />
   );
 }
