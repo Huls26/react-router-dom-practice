@@ -19,6 +19,7 @@ export default function HostVansPage() {
       img={vans.imageUrl}
       name={vans.name}
       price={vans.price}
+      id={vans.id}
     />
   ));
 
@@ -27,7 +28,7 @@ export default function HostVansPage() {
     <section className="font-inter text-dark-2 ">
       <h1 className="font-bold text-3xl mb-8">Your listed vans</h1>
 
-      <div>
+      <div className="flex flex-col space-y-3.5">
         {vansList.length ? mapVansList : loading}
       </div>
 
