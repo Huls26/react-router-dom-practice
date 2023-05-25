@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import BtnTypeStyle from '@components/btnTypeStyle';
+import BtnTypeStyle from '@components/BtnTypeStyle';
 import BtnOrange from '@components/BtnOrange';
 import BackArrow from '@components/BackArrow';
 
