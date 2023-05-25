@@ -1,16 +1,18 @@
-export default function HostVansDetailChild() {
+import PropTypes from 'prop-types';
+
+export default function ArticleDetails({ name, type, description }) {
   return (
     <article className="font-bold font-inter font-lg text-dark-2 flex flex-col space-y-4">
       <h3>
         Name:
         {' '}
-        <span className="font-medium">Modest Explorer</span>
+        <span className="font-medium capitalize">{name}</span>
         {' '}
       </h3>
       <h3>
         Category:
         {' '}
-        <span className="font-medium">Simple</span>
+        <span className="font-medium capitalize">{type}</span>
         {' '}
       </h3>
 
@@ -18,7 +20,7 @@ export default function HostVansDetailChild() {
         Description:
         {' '}
 
-        <span className="font-medium">{' Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci delectus consequatur consequuntur laborum dolor suscipit! Hic maiores dolorum nisi nulla? '}</span>
+        <span className="font-medium capitalize">{description}</span>
       </h3>
 
       <h3>
@@ -32,3 +34,9 @@ export default function HostVansDetailChild() {
     </article>
   );
 }
+
+ArticleDetails.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};

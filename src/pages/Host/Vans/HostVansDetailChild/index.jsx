@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import HostVansDetailArticle from '@features/HostVansDetailArticle';
+import ArticleDetails from './components/ArticleDetails';
 
-export default function HostVansDetails() {
+export default function HostVansDetailChild() {
   const [vansDetail, setVansDetail] = useState(() => {});
   const { id } = useParams();
 
@@ -19,15 +19,11 @@ export default function HostVansDetails() {
 
   return (
     vansDetail ? (
-      <HostVansDetailArticle
-        type={vansDetail.type}
-        img={vansDetail.imageUrl}
+      <ArticleDetails
         name={vansDetail.name}
-        price={vansDetail.price}
-        id={vansDetail.id}
+        type={vansDetail.type}
+        description={vansDetail.description}
       />
-    )
-      : <h1 className="text-3xl font-bold text-center mt-3">...Loading</h1>
-
+    ) : <h1 className="font-bold text-3xl text-center mt-4">...Loading</h1>
   );
 }
