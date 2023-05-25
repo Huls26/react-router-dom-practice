@@ -25,6 +25,7 @@ export default function HostVansDetails() {
         name={vansDetail.name}
         price={vansDetail.price}
         id={vansDetail.id}
+        description={vansDetail.description}
       />
     )
       : <h1 className="text-3xl font-bold text-center mt-3">...Loading</h1>

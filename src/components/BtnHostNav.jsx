@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function BtnHostNav({ link, navText }) {
+export default function BtnHostNav({ link, navText, isEnd }) {
   // eslint-disable-next-line max-len
   // const activeStyle = 'underline underline-offset-4 text-dark-2 cursor-pointer capitalize';
   // eslint-disable-next-line max-len
@@ -17,7 +17,7 @@ export default function BtnHostNav({ link, navText }) {
       <NavLink
         to={link}
         // className={({ isActive }) => (isActive ? activeStyle : hoverStyle)}
-        end
+        end={isEnd}
         style={({ isActive }) => (isActive ? inlineStyle : null)}
       >
         {navText}
@@ -30,4 +30,6 @@ export default function BtnHostNav({ link, navText }) {
 BtnHostNav.propTypes = {
   link: PropTypes.string.isRequired,
   navText: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  isEnd: PropTypes.bool,
 };

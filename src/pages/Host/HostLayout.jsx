@@ -6,10 +6,10 @@ export default function HostLayout() {
     <section className="bg-primary-1 pt-8 px-6 pb-14">
       <nav className="mb-11">
         <ul className="flex space-x-5">
-          <BtnHostNav link="/host" navText="dashboard" />
-          <BtnHostNav link="/host/income" navText="income" />
-          <BtnHostNav link="/host/vans" navText="vans" />
-          <BtnHostNav link="/host/reviews" navText="reviews" />
+          <BtnHostNav link="." navText="dashboard" isEnd />
+          <BtnHostNav link="income" navText="income" />
+          <BtnHostNav link="vans" navText="vans" />
+          <BtnHostNav link="reviews" navText="reviews" />
         </ul>
       </nav>
 

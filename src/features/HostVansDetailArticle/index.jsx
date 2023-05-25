@@ -7,11 +7,11 @@ import BtnTypeStyle from '@components/BtnTypeStyle';
 import BtnHostNav from '@components/BtnHostNav';
 
 export default function HostVansDetailArticle({
-  type, img, name, price, id,
+  type, img, name, price, description, // id,
 }) {
   return (
     <section>
-      <BackArrow link="/host/vans" />
+      <BackArrow link=".." />
       <article className="bg-white p-6 font-inter text-dark-2">
         <div className="flex items-center space-x-5 mb-6">
           <div className="w-60 h-60">
@@ -31,13 +31,16 @@ export default function HostVansDetailArticle({
 
         <nav className="mb-7">
           <ul className="flex space-x-3 font-extrabold">
-            <BtnHostNav link={`/host/vans/${id}`} navText="details" />
-            <BtnHostNav link={`/host/vans/${id}/pricing`} navText="pricing" />
-            <BtnHostNav link={`/host/vans/${id}/photos`} navText="photos" />
+            <BtnHostNav link="." navText="details" isEnd />
+            <BtnHostNav link="pricing" navText="pricing" />
+            <BtnHostNav link="photos" navText="photos" />
           </ul>
         </nav>
 
-        <Outlet />
+        <Outlet context={{
+          type, img, name, price, description,
+        }}
+        />
       </article>
     </section>
   );
@@ -48,5 +51,6 @@ HostVansDetailArticle.propTypes = {
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  // id: PropTypes.string.isRequired,
 };
