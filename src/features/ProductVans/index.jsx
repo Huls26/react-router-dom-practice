@@ -1,6 +1,6 @@
 // import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import BtnTypeStyle from '@components/btnTypeStyle';
+import BtnTypeStyle from '@components/BtnTypeStyle';
 
 export default function ProductVans({
   img, name, price, type, // id,
