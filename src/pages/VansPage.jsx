@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import ProductVans from '@features/ProductVans';
 import BtnType from '@features/ProductVans/components/BtnType';
 
@@ -7,6 +7,11 @@ import '../server';
 
 export default function VansPage() {
   const [vansList, setVansList] = useState(() => []);
+  // eslint-disable-next-line no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilter = searchParams.get('type');
+
+  console.log(typeFilter);
 
   useEffect(() => {
     fetch('/api/vans')
@@ -14,7 +19,11 @@ export default function VansPage() {
       .then(({ vans }) => setVansList(() => [...vans]));
   }, []);
 
-  const productList = vansList.map(({
+  const filterProduct = typeFilter ? vansList
+    .filter((van) => (van.type.toLowerCase() === typeFilter))
+    : vansList;
+
+  const productList = filterProduct.map(({
     imageUrl, name, price, type, id,
   }) => (
     <Link to={`/vans/${id}`} key={id}>
@@ -35,11 +44,11 @@ export default function VansPage() {
 
       <div className="flex justify-between mb-14">
         <ul className="space-x-4">
-          <BtnType type="simple" />
-          <BtnType type="luxury" />
-          <BtnType type="rugged" />
+          <Link to="?type=simple"><BtnType type="simple" /></Link>
+          <Link to="?type=luxury"><BtnType type="luxury" /></Link>
+          <Link to="?type=rugged"><BtnType type="rugged" /></Link>
         </ul>
-        <button className="font-medium text-base text-dark-3 underline underline-offset-4" type="button">Clear filters</button>
+        <button className="font-medium text-base text-dark-3 underline underline-offset-4" type="button"><Link to=".">Clear filters</Link></button>
       </div>
 
       {
