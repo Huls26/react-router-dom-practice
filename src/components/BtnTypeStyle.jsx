@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export default function BtnTypeStyle({ type }) {
+export default function BtnTypeStyle({ type, callback }) {
   let btnStyleBg = '';
 
   if (type.toLowerCase() === 'simple') {
@@ -19,10 +19,12 @@ export default function BtnTypeStyle({ type }) {
                   hover:opacity-80
               `;
   return (
-    <button className={btnStyles} type="button">{type}</button>
+    <button onClick={callback} className={btnStyles} type="button">{type}</button>
   );
 }
 
 BtnTypeStyle.propTypes = {
   type: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  callback: PropTypes.func,
 };

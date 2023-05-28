@@ -7,12 +7,10 @@ import '../server';
 
 export default function VansPage() {
   const [vansList, setVansList] = useState(() => []);
-  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
 
   console.log(typeFilter);
-
   useEffect(() => {
     fetch('/api/vans')
       .then((res) => res.json())
@@ -38,17 +36,54 @@ export default function VansPage() {
 
   ));
 
+  function handleSearchParams(key, value) {
+    setSearchParams((prevParams) => {
+      if (value) {
+        const setParams = {};
+
+        prevParams.forEach((v, k) => {
+          setParams[k] = v;
+        });
+
+        setParams[key] = value;
+
+        return setParams;
+      }
+
+      prevParams.delete(key);
+      return prevParams;
+    });
+  }
+
   return (
     <section className="font-inter bg-primary-1 px-6 pt-14 pb-20">
       <h1 className="font-bold text-3xl mb-6">Explore our van options</h1>
 
       <div className="flex justify-between mb-14">
         <ul className="space-x-4">
-          <Link to="?type=simple"><BtnType type="simple" /></Link>
-          <Link to="?type=luxury"><BtnType type="luxury" /></Link>
-          <Link to="?type=rugged"><BtnType type="rugged" /></Link>
+          <BtnType
+            type="simple"
+            callback={() => handleSearchParams('type', 'simple')}
+            active={typeFilter || 'none'}
+          />
+          <BtnType
+            type="luxury"
+            callback={() => handleSearchParams('type', 'luxury')}
+            active={typeFilter || 'none'}
+          />
+          <BtnType
+            type="rugged"
+            callback={() => handleSearchParams('type', 'rugged')}
+            active={typeFilter || 'none'}
+          />
         </ul>
-        <button className="font-medium text-base text-dark-3 underline underline-offset-4" type="button"><Link to=".">Clear filters</Link></button>
+
+        {
+          typeFilter
+            ? <button onClick={() => handleSearchParams('type', null)} className="font-medium text-base text-dark-3 underline underline-offset-4" type="button">Clear filters</button>
+            : null
+        }
+
       </div>
 
       {
