@@ -5,7 +5,7 @@ export default function HostVansArticle({
   img, name, price, id,
 }) {
   return (
-    <Link to={`/host/vans/${id}`}>
+    <Link to={`${id}`}>
       <article className="
           bg-white py-4 px-6
             flex space-x-4

@@ -10,7 +10,6 @@ export default function VansPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
 
-  console.log(typeFilter);
   useEffect(() => {
     fetch('/api/vans')
       .then((res) => res.json())
@@ -24,7 +23,7 @@ export default function VansPage() {
   const productList = filterProduct.map(({
     imageUrl, name, price, type, id,
   }) => (
-    <Link to={`/vans/${id}`} key={id}>
+    <Link to={`${id}`} key={id}>
       <ProductVans
         img={imageUrl}
         name={name}
@@ -49,6 +48,11 @@ export default function VansPage() {
 
         return setParams;
       }
+
+      // if (value) {
+      //   prevParams.append(key, value);
+      //   return prevParams;
+      // }
 
       prevParams.delete(key);
       return prevParams;
