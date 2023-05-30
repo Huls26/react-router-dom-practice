@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 
 import BtnTypeStyle from '@components/BtnTypeStyle';
 import BtnOrange from '@components/BtnOrange';
@@ -8,10 +9,12 @@ export default function VanDetails({ info }) {
   const {
     imageUrl, type, price, name, description,
   } = info;
+  const { state } = useLocation();
+  const linkTo = state.search ? `..?${state.search}` : '..';
 
   return (
     <section className="bg-white px-6 pt-10 pb-20">
-      <BackArrow link=".." />
+      <BackArrow link={linkTo} type={state.type || ''} />
 
       <div className="flex flex-col md:flex-row md:space-x-7">
         <div className="w-full h-1/2 mb-12 rounded md:basis-1/2">

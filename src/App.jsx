@@ -11,6 +11,8 @@ import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
 import VansPage from '@pages/VansPage';
 import VanDetailsPage from '@pages/VanDetailsPage';
+import ErrorPage from '@pages/ErrorPage';
+
 import HostLayout from '@pages/Host/HostLayout';
 import Dashboard from '@pages/Host/Dashboard';
 import IncomePage from '@pages/Host/IncomePage';
@@ -18,9 +20,9 @@ import ReviewPage from '@pages/Host/ReviewPage';
 import HostVansPage from '@pages/Host/HostVansPage';
 import HostVansDetails from '@pages/Host/HostVansDetails';
 
-import HostVansDetailChild from './pages/Host/Vans/HostVansDetailChild';
-import HostVansPhotosChild from './pages/Host/Vans/HostVansPhotosChild';
-import HostVansPricingChild from './pages/Host/Vans/HostVansPricingChild';
+import HostVansDetailChild from '@pages/Host/Vans/HostVansDetailChild';
+import HostVansPhotosChild from '@pages/Host/Vans/HostVansPhotosChild';
+import HostVansPricingChild from '@pages/Host/Vans/HostVansPricingChild';
 
 // const router = createBrowserRouter([
 //   {
@@ -70,6 +72,7 @@ const router = createBrowserRouter(
     <Route
       element={<MainPage />}
     >
+      <Route path="*" element={<ErrorPage />} />
       <Route index element={<HomePage />} />
       <Route
         path="about"

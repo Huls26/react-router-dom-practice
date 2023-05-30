@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import arrow from '@assets/arrow-1.svg';
 
-export default function BackArrow({ link }) {
+export default function BackArrow({ link, type }) {
+  const vansType = type || 'all';
+
   return (
     <Link
       to={link}
@@ -12,7 +14,13 @@ export default function BackArrow({ link }) {
         <div>
           <img src={arrow} alt="arrow" />
         </div>
-        <span>Back to all vans</span>
+        <span>
+          Back to
+          {' '}
+          {vansType}
+          {' '}
+          vans
+        </span>
       </button>
     </Link>
   );
@@ -20,4 +28,5 @@ export default function BackArrow({ link }) {
 
 BackArrow.propTypes = {
   link: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };

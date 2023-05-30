@@ -23,7 +23,14 @@ export default function VansPage() {
   const productList = filterProduct.map(({
     imageUrl, name, price, type, id,
   }) => (
-    <Link to={`${id}`} key={id}>
+    <Link
+      to={`${id}`}
+      key={id}
+      state={{
+        search: searchParams.toString(),
+        type: typeFilter,
+      }}
+    >
       <ProductVans
         img={imageUrl}
         name={name}
