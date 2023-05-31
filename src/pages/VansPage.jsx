@@ -3,17 +3,21 @@ import { Link, useSearchParams } from 'react-router-dom';
 import ProductVans from '@features/ProductVans';
 import BtnType from '@features/ProductVans/components/BtnType';
 
-import '../server';
+import { getVans } from '@api';
 
 export default function VansPage() {
   const [vansList, setVansList] = useState(() => []);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
 
   useEffect(() => {
-    fetch('/api/vans')
-      .then((res) => res.json())
-      .then(({ vans }) => setVansList(() => [...vans]));
+    (async () => {
+      setIsLoading(true);
+      const { vans } = await getVans();
+      setVansList(() => [...vans]);
+      setIsLoading(false);
+    })();
   }, []);
 
   const filterProduct = typeFilter ? vansList
@@ -66,6 +70,7 @@ export default function VansPage() {
     });
   }
 
+  if (isLoading) return <h1 className="text-3xl font-bold text-center bg-white py-10">...Loading</h1>;
   return (
     <section className="font-inter bg-primary-1 px-6 pt-14 pb-20">
       <h1 className="font-bold text-3xl mb-6">Explore our van options</h1>
