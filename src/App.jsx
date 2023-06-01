@@ -9,7 +9,7 @@ import {
 import MainPage from '@pages/MainPage';
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
-import VansPage from '@pages/VansPage';
+import VansPage, { loader as vansLoader } from '@pages/VansPage';
 import VanDetailsPage from '@pages/VanDetailsPage';
 import ErrorPage from '@pages/ErrorPage';
 
@@ -81,6 +81,7 @@ const router = createBrowserRouter(
       <Route
         path="vans"
         element={<VansPage />}
+        loader={vansLoader}
       />
       <Route
         path="vans/:id"

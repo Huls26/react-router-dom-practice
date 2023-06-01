@@ -14,6 +14,10 @@ export default function BtnType({ type, callback, active }) {
     hoverStyle = 'hover:bg-ruggedBg';
     activeBg = active === 'rugged' ? 'bg-ruggedBg text-white' : '';
   }
+  // const inlineStyle = {
+  //   backgroundColor: '#E17654',
+  //   color: '#FFFFFF',
+  // };
 
   const styles = `
                   bg-btnBg

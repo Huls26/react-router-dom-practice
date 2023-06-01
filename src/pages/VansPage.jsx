@@ -1,28 +1,36 @@
-import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+// import { useState, useEffect } from 'react';
+import { Link, useSearchParams, useLoaderData } from 'react-router-dom';
 import ProductVans from '@features/ProductVans';
 import BtnType from '@features/ProductVans/components/BtnType';
 
 import { getVans } from '@api';
 
+export async function loader() {
+  const { vans } = await getVans();
+
+  return vans;
+}
+
 export default function VansPage() {
-  const [vansList, setVansList] = useState(() => []);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [vansList, setVansList] = useState(() => []);
+  // const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const { vans } = await getVans();
-      setVansList(() => [...vans]);
-      setIsLoading(false);
-    })();
-  }, []);
+  const data = useLoaderData();
 
-  const filterProduct = typeFilter ? vansList
+  // useEffect(() => {
+  //   (async () => {
+  //     setIsLoading(true);
+  //     const { vans } = await getVans();
+  //     setVansList(() => [...vans]);
+  //     setIsLoading(false);
+  //   })();
+  // }, []);
+
+  const filterProduct = typeFilter ? [...data]
     .filter((van) => (van.type.toLowerCase() === typeFilter))
-    : vansList;
+    : [...data];
 
   const productList = filterProduct.map(({
     imageUrl, name, price, type, id,
@@ -49,28 +57,34 @@ export default function VansPage() {
   function handleSearchParams(key, value) {
     setSearchParams((prevParams) => {
       if (value) {
-        const setParams = {};
-
-        prevParams.forEach((v, k) => {
-          setParams[k] = v;
-        });
-
-        setParams[key] = value;
-
-        return setParams;
+        prevParams.set(key, value);
+      } else {
+        prevParams.delete(key);
       }
+      // if (value) {
+      //   const setParams = {};
+
+      //   prevParams.forEach((v, k) => {
+      //     setParams[k] = v;
+      //   });
+
+      //   setParams[key] = value;
+
+      //   return setParams;
+      // }
 
       // if (value) {
       //   prevParams.append(key, value);
       //   return prevParams;
       // }
 
-      prevParams.delete(key);
       return prevParams;
     });
   }
 
-  if (isLoading) return <h1 className="text-3xl font-bold text-center bg-white py-10">...Loading</h1>;
+  // if (isLoading)
+  // eslint-disable-next-line max-len
+  // return <h1 className="text-3xl font-bold text-center bg-white py-10">...Loading</h1>;
   return (
     <section className="font-inter bg-primary-1 px-6 pt-14 pb-20">
       <h1 className="font-bold text-3xl mb-6">Explore our van options</h1>

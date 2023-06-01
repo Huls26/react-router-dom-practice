@@ -8,5 +8,5 @@ export async function getVans() {
 }
 
 export async function fetchSomething() {
-  console.log('something');
+  return 'return something';
 }
