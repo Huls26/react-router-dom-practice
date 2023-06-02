@@ -5,9 +5,10 @@ import BtnType from '@features/ProductVans/components/BtnType';
 
 import { getVans } from '@api';
 
-export async function loader() {
-  const { vans } = await getVans();
+export function loader() {
+  const vans = getVans();
 
+  // i directly use the api fetch
   return vans;
 }
 

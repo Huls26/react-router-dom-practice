@@ -2,9 +2,9 @@ import '../server';
 
 export async function getVans() {
   const res = await fetch('/api/vans');
-  const data = res.json();
+  const { vans } = await res.json();
 
-  return data;
+  return vans;
 }
 
 export async function fetchSomething() {

@@ -7,9 +7,12 @@ import {
 } from 'react-router-dom';
 
 import MainPage from '@pages/MainPage';
+import LoginPage from '@pages/LoginPage';
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
-import VansPage, { loader as vansLoader } from '@pages/VansPage';
+import VansPage, {
+// loader as vansLoader,
+} from '@pages/VansPage';
 import VanDetailsPage from '@pages/VanDetailsPage';
 import ErrorPage from '@pages/ErrorPage';
 
@@ -23,6 +26,8 @@ import HostVansDetails from '@pages/Host/HostVansDetails';
 import HostVansDetailChild from '@pages/Host/Vans/HostVansDetailChild';
 import HostVansPhotosChild from '@pages/Host/Vans/HostVansPhotosChild';
 import HostVansPricingChild from '@pages/Host/Vans/HostVansPricingChild';
+
+import { getVans } from './api';
 
 // const router = createBrowserRouter([
 //   {
@@ -75,13 +80,18 @@ const router = createBrowserRouter(
       <Route path="*" element={<ErrorPage />} />
       <Route index element={<HomePage />} />
       <Route
+        path="login"
+        element={<LoginPage />}
+      />
+      <Route
         path="about"
         element={<AboutPage />}
       />
       <Route
         path="vans"
         element={<VansPage />}
-        loader={vansLoader}
+        loader={getVans}
+        errorElement={<ErrorPage />}
       />
       <Route
         path="vans/:id"
