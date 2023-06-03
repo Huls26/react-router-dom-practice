@@ -1,21 +1,29 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 import HostVansDetailArticle from '@features/HostVansDetailArticle';
+import { getHostVansDetail } from '@api';
+
+export async function loader({ params }) {
+  const data = getHostVansDetail(params.id);
+
+  return data;
+}
 
 export default function HostVansDetails() {
-  const [vansDetail, setVansDetail] = useState(() => {});
-  const { id } = useParams();
+  const [vansDetail] = useLoaderData();
 
-  useEffect(() => {
-    fetch(`/api/host/vans/${id}`)
-      .then((res) => res.json())
-      .then((data) => setVansDetail(() => {
-        const [d] = data.vans;
+  // const [vansDetail, setVansDetail] = useState(() => {});
+  // const { id } = useParams();
 
-        return { ...d };
-      }));
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`/api/host/vans/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setVansDetail(() => {
+  //       const [d] = data.vans;
+
+  //       return { ...d };
+  //     }));
+  // }, [id]);
 
   return (
     vansDetail ? (

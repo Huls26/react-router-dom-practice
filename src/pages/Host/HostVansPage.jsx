@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-import '../../server';
 import HostVansArticle from '@features/HostVansArticle';
 
-export default function HostVansPage() {
-  const [vansList, setVansList] = useState(() => []);
+import { getHostVans } from '@api';
 
-  useEffect(() => {
-    fetch('/api/host/vans')
-      .then((res) => res.json())
-      .then(({ vans }) => setVansList(() => [...vans]));
-  }, []);
+import '../../server';
+
+export async function loader() {
+  const data = getHostVans();
+
+  return data;
+}
+
+export default function HostVansPage() {
+  const vansList = useLoaderData();
 
   const mapVansList = vansList.map((vans) => (
     <HostVansArticle

@@ -7,6 +7,16 @@ export async function getVans() {
   return vans;
 }
 
-export async function fetchSomething() {
-  return 'return something';
+export async function getHostVans() {
+  const res = await fetch('/api/host/vans');
+  const { vans } = await res.json();
+
+  return vans;
+}
+
+export async function getHostVansDetail(id) {
+  const res = await fetch(`/api/host/vans/${id}`);
+  const { vans } = await res.json();
+
+  return vans;
 }

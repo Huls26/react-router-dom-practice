@@ -20,15 +20,6 @@ export default function VansPage() {
 
   const data = useLoaderData();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     setIsLoading(true);
-  //     const { vans } = await getVans();
-  //     setVansList(() => [...vans]);
-  //     setIsLoading(false);
-  //   })();
-  // }, []);
-
   const filterProduct = typeFilter ? [...data]
     .filter((van) => (van.type.toLowerCase() === typeFilter))
     : [...data];

@@ -11,7 +11,7 @@ export default function HostVansDetailArticle({
 }) {
   return (
     <section>
-      <BackArrow link=".." />
+      <BackArrow link=".." type="" />
       <article className="bg-white p-6 font-inter text-dark-2">
         <div className="flex items-center space-x-5 mb-6">
           <div className="w-60 h-60">

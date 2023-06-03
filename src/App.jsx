@@ -20,8 +20,8 @@ import HostLayout from '@pages/Host/HostLayout';
 import Dashboard from '@pages/Host/Dashboard';
 import IncomePage from '@pages/Host/IncomePage';
 import ReviewPage from '@pages/Host/ReviewPage';
-import HostVansPage from '@pages/Host/HostVansPage';
-import HostVansDetails from '@pages/Host/HostVansDetails';
+import HostVansPage, { loader as hostVansPageLoader } from '@pages/Host/HostVansPage';
+import HostVansDetails, { loader as hostVansDetailLoader } from '@pages/Host/HostVansDetails';
 
 import HostVansDetailChild from '@pages/Host/Vans/HostVansDetailChild';
 import HostVansPhotosChild from '@pages/Host/Vans/HostVansPhotosChild';
@@ -102,15 +102,27 @@ const router = createBrowserRouter(
         path="host"
         element={<HostLayout />}
       >
-        <Route index element={<Dashboard />} />
-        <Route path="income" element={<IncomePage />} />
-        <Route path="vans" element={<HostVansPage />} />
-        <Route path="vans/:id" element={<HostVansDetails />}>
-          <Route index element={<HostVansDetailChild />} />
-          <Route path="pricing" element={<HostVansPricingChild />} />
-          <Route path="photos" element={<HostVansPhotosChild />} />
+        <Route index element={<Dashboard />} loader={async () => null} />
+        <Route path="income" element={<IncomePage />} loader={async () => null} />
+        <Route
+          path="vans"
+          element={<HostVansPage />}
+          loader={hostVansPageLoader}
+        />
+        <Route
+          path="vans/:id"
+          element={<HostVansDetails />}
+          loader={hostVansDetailLoader}
+        >
+          <Route
+            index
+            element={<HostVansDetailChild />}
+            loader={async () => null}
+          />
+          <Route path="pricing" element={<HostVansPricingChild />} loader={async () => null} />
+          <Route path="photos" element={<HostVansPhotosChild />} loader={async () => null} />
         </Route>
-        <Route path="reviews" element={<ReviewPage />} />
+        <Route path="reviews" element={<ReviewPage />} loader={async () => null} />
 
       </Route>
     </Route>,
