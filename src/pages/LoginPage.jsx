@@ -21,7 +21,6 @@ export default function LoginPage() {
     console.log('login');
   }
 
-  console.log(formValue);
   return (
     <main
       className="
@@ -49,6 +48,7 @@ export default function LoginPage() {
           name="password"
           onChange={handleInputChange}
           value={formValue.password}
+          autoComplete="on"
         />
         <FullBtn bg="orange" text="sign in" />
       </form>

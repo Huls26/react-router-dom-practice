@@ -1,19 +1,33 @@
-import { useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import HostVansArticle from '@features/HostVansArticle';
 
 import { getHostVans } from '@api';
+import authReq from '@helper/authReq';
 
 import '../../server';
 
 export async function loader() {
-  const data = getHostVans();
+  const user = await authReq();
 
-  return data;
+  if (user) {
+    const vansList = await getHostVans();
+    return { vansList, user };
+  }
+
+  return { vansList: [], user };
 }
 
 export default function HostVansPage() {
-  const vansList = useLoaderData();
+  const { vansList, user } = useLoaderData();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login', { replace: true });
+    }
+  }, [user, navigate]);
 
   const mapVansList = vansList.map((vans) => (
     <HostVansArticle
@@ -26,13 +40,14 @@ export default function HostVansPage() {
     />
   ));
 
-  const loading = <h1 className="text-dark-1 text-lg font-bold text-center py-6">...Loading</h1>;
+  // eslint-disable-next-line max-len
+  // const loading = <h1 className="text-dark-1 text-lg font-bold text-center py-6">...Loading</h1>;
   return (
     <section className="font-inter text-dark-2 ">
       <h1 className="font-bold text-3xl mb-8">Your listed vans</h1>
 
       <div className="flex flex-col space-y-3.5">
-        {vansList.length ? mapVansList : loading}
+        { mapVansList }
       </div>
 
     </section>

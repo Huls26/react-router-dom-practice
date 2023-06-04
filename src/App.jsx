@@ -4,6 +4,7 @@ import {
   createRoutesFromElements,
   Route,
   // Link,
+  // redirect,
 } from 'react-router-dom';
 
 import MainPage from '@pages/MainPage';
@@ -17,8 +18,8 @@ import VanDetailsPage from '@pages/VanDetailsPage';
 import ErrorPage from '@pages/ErrorPage';
 
 import HostLayout from '@pages/Host/HostLayout';
-import Dashboard from '@pages/Host/Dashboard';
-import IncomePage from '@pages/Host/IncomePage';
+import Dashboard, { loader as HostDashBoardLoader } from '@pages/Host/Dashboard';
+import IncomePage, { loader as IncomePageLoader } from '@pages/Host/IncomePage';
 import ReviewPage from '@pages/Host/ReviewPage';
 import HostVansPage, { loader as hostVansPageLoader } from '@pages/Host/HostVansPage';
 import HostVansDetails, { loader as hostVansDetailLoader } from '@pages/Host/HostVansDetails';
@@ -28,6 +29,7 @@ import HostVansPhotosChild from '@pages/Host/Vans/HostVansPhotosChild';
 import HostVansPricingChild from '@pages/Host/Vans/HostVansPricingChild';
 
 import { getVans } from './api';
+// import { authReq } from './helper/authReq';
 
 // const router = createBrowserRouter([
 //   {
@@ -102,8 +104,17 @@ const router = createBrowserRouter(
         path="host"
         element={<HostLayout />}
       >
-        <Route index element={<Dashboard />} loader={async () => null} />
-        <Route path="income" element={<IncomePage />} loader={async () => null} />
+        <Route
+          index
+          element={<Dashboard />}
+          loader={HostDashBoardLoader}
+         // errorElement={<ErrorPage />}
+        />
+        <Route
+          path="income"
+          element={<IncomePage />}
+          loader={IncomePageLoader}
+        />
         <Route
           path="vans"
           element={<HostVansPage />}

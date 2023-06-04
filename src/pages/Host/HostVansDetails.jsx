@@ -1,16 +1,30 @@
-import { useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import HostVansDetailArticle from '@features/HostVansDetailArticle';
 import { getHostVansDetail } from '@api';
+import authReq from '@helper/authReq';
 
 export async function loader({ params }) {
-  const data = getHostVansDetail(params.id);
+  const user = await authReq();
 
-  return data;
+  if (user) {
+    const [vansDetail] = await getHostVansDetail(params.id);
+    return { vansDetail, user };
+  }
+
+  return { vansList: [], user };
 }
 
 export default function HostVansDetails() {
-  const [vansDetail] = useLoaderData();
+  const { vansDetail, user } = useLoaderData();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login', { replace: true });
+    }
+  }, [user, navigate]);
 
   // const [vansDetail, setVansDetail] = useState(() => {});
   // const { id } = useParams();
@@ -26,17 +40,16 @@ export default function HostVansDetails() {
   // }, [id]);
 
   return (
-    vansDetail ? (
-      <HostVansDetailArticle
-        type={vansDetail.type}
-        img={vansDetail.imageUrl}
-        name={vansDetail.name}
-        price={vansDetail.price}
-        id={vansDetail.id}
-        description={vansDetail.description}
-      />
+    vansDetail
+    && (
+    <HostVansDetailArticle
+      type={vansDetail.type}
+      img={vansDetail.imageUrl}
+      name={vansDetail.name}
+      price={vansDetail.price}
+      id={vansDetail.id}
+      description={vansDetail.description}
+    />
     )
-      : <h1 className="text-3xl font-bold text-center mt-3">...Loading</h1>
-
   );
 }
