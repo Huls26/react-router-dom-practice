@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import { loginUser } from '@api';
 
 import FullBtn from '@components/FullBtn';
+import notValid from '@helper/notValid';
+import validUser from '@helper/validUser';
 
 import '../server';
 
@@ -17,8 +19,9 @@ export async function loader({ request }) {
 export default function LoginPage() {
   const message = useLoaderData();
   const [status, setStatus] = useState(() => 'idle');
-  // const [error, setError] = useState(() => null);
+  const [error, setError] = useState(() => null);
   const [formValue, setFormValue] = useState(() => ({ email: '', password: '' }));
+  const navigate = useNavigate();
   const isDisable = status === 'idle';
 
   function handleInputChange(event) {
@@ -34,16 +37,24 @@ export default function LoginPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    setError(() => null);
     setStatus(() => 'submitting');
-    const data = await loginUser({ ...formValue });
 
-    console.log(data);
-    setTimeout(() => {
-      console.log('running');
-      setStatus(() => 'idle');
-    }, 3000);
+    try {
+      const values = { ...formValue };
+      await notValid(values);
+      const user = await loginUser(values);
+      await validUser(user);
+      navigate('/', { replace: true });
+    } catch (e) {
+      setError(() => e.message);
+    } finally {
+      setTimeout(() => {
+        // console.log('running');
+        setStatus(() => 'idle');
+      }, 3000);
+    }
   }
-  console.log(status);
 
   return (
     <main
@@ -61,7 +72,16 @@ export default function LoginPage() {
         {message}
       </h2>
       )}
+
       <h1 className="font-bold text-3xl text-dark-2 mb-12">Sign in to your account</h1>
+
+      { error && (
+      <h2 className="text-lg font-bold text-orange
+       mb-4"
+      >
+        {error}
+      </h2>
+      )}
 
       <form onSubmit={handleSubmit} className="w-full max-w-[40em] mb-5">
         <input

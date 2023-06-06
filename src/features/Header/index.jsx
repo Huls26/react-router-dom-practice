@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import icon from '@assets/icon.svg';
 
 export default function Header() {
   const activeStyle = 'underline underline-offset-4 text-dark-2 cursor-pointer';
@@ -54,6 +55,17 @@ export default function Header() {
               }
             >
               Vans
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
+              to="/login"
+              className={
+                ({ isActive }) => (isActive ? activeStyle : hoverStyle)
+              }
+            >
+              <img src={icon} alt="icon" />
             </NavLink>
           </li>
         </ul>
