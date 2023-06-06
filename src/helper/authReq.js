@@ -3,7 +3,3 @@ export default async function authReq() {
 
   return isLoggedIn;
 }
-
-export function hello() {
-  return 'something';
-}

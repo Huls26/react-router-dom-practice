@@ -20,3 +20,22 @@ export async function getHostVansDetail(id) {
 
   return vans;
 }
+
+export async function loginUser(creds) {
+  const res = await fetch(
+    '/api/login',
+    { method: 'post', body: JSON.stringify(creds) },
+  );
+  const data = await res.json();
+
+  if (!res.ok) {
+    // eslint-disable-next-line no-throw-literal
+    throw {
+      message: data.message,
+      statusText: res.statusText,
+      status: res.status,
+    };
+  }
+
+  return data;
+}

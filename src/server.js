@@ -3,6 +3,7 @@ import { createServer, Model } from 'miragejs';
 createServer({
   models: {
     vans: Model,
+    users: Model,
   },
 
   seeds(server) {
@@ -24,18 +25,20 @@ createServer({
     server.create('van', {
       id: '6', name: 'Green Wonder', price: 70, description: "With this van, you can take your travel life to the next level. The Green Wonder is a sustainable vehicle that's perfect for people who are looking for a stylish, eco-friendly mode of transport that can go anywhere.", imageUrl: 'https://assets.scrimba.com/advanced-react/react-router/green-wonder.png', type: 'rugged', hostId: '123',
     });
+    server.create('user', {
+      id: '123', email: 'b@b.com', password: 'p123', name: 'Bob',
+    });
   },
 
   routes() {
     this.namespace = 'api';
     this.logging = false;
-    this.timing = 2000;
+    // this.timing = 2000
 
-    // eslint-disable-next-line arrow-body-style, no-unused-vars
-    this.get('/vans', (schema) => {
-      return new Response(400, {}, { error: 'Error fetching data' });
-      // return schema.vans.all();
-    });
+    this.get('/vans', (schema) =>
+    // return new Response(400, {}, {error: "Error fetching data"})
+      // eslint-disable-next-line implicit-arrow-linebreak
+      schema.vans.all());
 
     this.get('/vans/:id', (schema, request) => {
       const { id } = request.params;
@@ -50,7 +53,25 @@ createServer({
     this.get('/host/vans/:id', (schema, request) => {
       // Hard-code the hostId for now
       const { id } = request.params;
-      return schema.vans.where({ id, hostId: '123' });
+      return schema.vans.findBy({ id, hostId: '123' });
+    });
+
+    this.post('/login', (schema, request) => {
+      const { email, password } = JSON.parse(request.requestBody);
+      // This is an extremely naive version of authentication. Please don't
+      // do this in the real world, and never save raw text passwords
+      // in your database 😇
+      const foundUser = schema.users.findBy({ email, password });
+      if (!foundUser) {
+        return new Response(401, {}, { message: 'No user with those credentials found!' });
+      }
+
+      // At the very least, don't send the password back to the client 😅
+      foundUser.password = undefined;
+      return {
+        user: foundUser,
+        token: "Enjoy your pizza, here's your tokens.",
+      };
     });
   },
 });

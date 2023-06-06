@@ -22,7 +22,7 @@ export default function HostVansDetails() {
 
   useEffect(() => {
     if (!user) {
-      navigate('/login', { replace: true });
+      navigate('/login?message=You must log in first.', { replace: true });
     }
   }, [user, navigate]);
 

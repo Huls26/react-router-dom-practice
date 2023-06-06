@@ -1,9 +1,25 @@
 import { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
+
+import { loginUser } from '@api';
 
 import FullBtn from '@components/FullBtn';
 
+import '../server';
+
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const message = url.searchParams.get('message');
+
+  return message;
+}
+
 export default function LoginPage() {
+  const message = useLoaderData();
+  const [status, setStatus] = useState(() => 'idle');
+  // const [error, setError] = useState(() => null);
   const [formValue, setFormValue] = useState(() => ({ email: '', password: '' }));
+  const isDisable = status === 'idle';
 
   function handleInputChange(event) {
     const { target } = event;
@@ -16,10 +32,18 @@ export default function LoginPage() {
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log('login');
+    setStatus(() => 'submitting');
+    const data = await loginUser({ ...formValue });
+
+    console.log(data);
+    setTimeout(() => {
+      console.log('running');
+      setStatus(() => 'idle');
+    }, 3000);
   }
+  console.log(status);
 
   return (
     <main
@@ -30,6 +54,13 @@ export default function LoginPage() {
         font-inter
       "
     >
+      { message && (
+      <h2 className="text-lg font-bold text-purple
+       mb-4"
+      >
+        {message}
+      </h2>
+      )}
       <h1 className="font-bold text-3xl text-dark-2 mb-12">Sign in to your account</h1>
 
       <form onSubmit={handleSubmit} className="w-full max-w-[40em] mb-5">
@@ -50,7 +81,11 @@ export default function LoginPage() {
           value={formValue.password}
           autoComplete="on"
         />
-        <FullBtn bg="orange" text="sign in" />
+        <FullBtn
+          bg="orange"
+          text="sign in"
+          isDisable={!isDisable}
+        />
       </form>
 
       <h3>

@@ -14,7 +14,7 @@ export default function IncomePage() {
 
   useEffect(() => {
     if (!data) {
-      navigate('/login', { replace: true });
+      navigate('/login?message=You must log in first.', { replace: true });
     }
   }, [data, navigate]);
 

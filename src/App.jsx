@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import MainPage from '@pages/MainPage';
-import LoginPage from '@pages/LoginPage';
+import LoginPage, { loader as loginPageLoader } from '@pages/LoginPage';
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
 import VansPage, {
@@ -20,7 +20,7 @@ import ErrorPage from '@pages/ErrorPage';
 import HostLayout from '@pages/Host/HostLayout';
 import Dashboard, { loader as HostDashBoardLoader } from '@pages/Host/Dashboard';
 import IncomePage, { loader as IncomePageLoader } from '@pages/Host/IncomePage';
-import ReviewPage from '@pages/Host/ReviewPage';
+import ReviewPage, { loader as reviewPageLoader } from '@pages/Host/ReviewPage';
 import HostVansPage, { loader as hostVansPageLoader } from '@pages/Host/HostVansPage';
 import HostVansDetails, { loader as hostVansDetailLoader } from '@pages/Host/HostVansDetails';
 
@@ -84,6 +84,7 @@ const router = createBrowserRouter(
       <Route
         path="login"
         element={<LoginPage />}
+        loader={loginPageLoader}
       />
       <Route
         path="about"
@@ -133,7 +134,7 @@ const router = createBrowserRouter(
           <Route path="pricing" element={<HostVansPricingChild />} loader={async () => null} />
           <Route path="photos" element={<HostVansPhotosChild />} loader={async () => null} />
         </Route>
-        <Route path="reviews" element={<ReviewPage />} loader={async () => null} />
+        <Route path="reviews" element={<ReviewPage />} loader={reviewPageLoader} />
 
       </Route>
     </Route>,
