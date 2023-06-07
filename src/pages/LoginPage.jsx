@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
 
-import { loginUser } from '@api';
+// import { loginUser } from '@api';
 
 import FullBtn from '@components/FullBtn';
-import notValid from '@helper/notValid';
-import validUser from '@helper/validUser';
+// import notValid from '@helper/notValid';
+// import validUser from '@helper/validUser';
 
 import '../server';
 
@@ -16,12 +16,23 @@ export async function loader({ request }) {
   return message;
 }
 
+export async function action({ request }) {
+  const formData = await request.formData();
+  const email = formData.get('email');
+  const password = formData.get('password');
+
+  console.log(email, password);
+  return null;
+}
+
 export default function LoginPage() {
   const message = useLoaderData();
+  // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = useState(() => 'idle');
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(() => null);
   const [formValue, setFormValue] = useState(() => ({ email: '', password: '' }));
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const isDisable = status === 'idle';
 
   function handleInputChange(event) {
@@ -35,26 +46,26 @@ export default function LoginPage() {
     }));
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setError(() => null);
-    setStatus(() => 'submitting');
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+  //   setError(() => null);
+  //   setStatus(() => 'submitting');
 
-    try {
-      const values = { ...formValue };
-      await notValid(values);
-      const user = await loginUser(values);
-      await validUser(user);
-      navigate('/', { replace: true });
-    } catch (e) {
-      setError(() => e.message);
-    } finally {
-      setTimeout(() => {
-        // console.log('running');
-        setStatus(() => 'idle');
-      }, 3000);
-    }
-  }
+  //   try {
+  //     const values = { ...formValue };
+  //     await notValid(values);
+  //     const user = await loginUser(values);
+  //     await validUser(user);
+  //     navigate('/', { replace: true });
+  //   } catch (e) {
+  //     setError(() => e.message);
+  //   } finally {
+  //     setTimeout(() => {
+  //       // console.log('running');
+  //       setStatus(() => 'idle');
+  //     }, 3000);
+  //   }
+  // }
 
   return (
     <main
@@ -83,7 +94,11 @@ export default function LoginPage() {
       </h2>
       )}
 
-      <form onSubmit={handleSubmit} className="w-full max-w-[40em] mb-5">
+      <Form
+        method="post"
+        // onSubmit={handleSubmit}
+        className="w-full max-w-[40em] mb-5"
+      >
         <input
           type="text"
           placeholder="Email address"
@@ -106,7 +121,7 @@ export default function LoginPage() {
           text="sign in"
           isDisable={!isDisable}
         />
-      </form>
+      </Form>
 
       <h3>
         Don’t have an account?

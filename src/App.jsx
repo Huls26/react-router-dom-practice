@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import MainPage from '@pages/MainPage';
-import LoginPage, { loader as loginPageLoader } from '@pages/LoginPage';
+import LoginPage, { loader as loginPageLoader, action as LoginPageAction } from '@pages/LoginPage';
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
 import VansPage, {
@@ -85,6 +85,7 @@ const router = createBrowserRouter(
         path="login"
         element={<LoginPage />}
         loader={loginPageLoader}
+        action={LoginPageAction}
       />
       <Route
         path="about"
