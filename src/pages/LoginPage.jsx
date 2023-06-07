@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { Form, useLoaderData } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import {
+  Form, useActionData, useLoaderData, useNavigate,
+} from 'react-router-dom';
 
-// import { loginUser } from '@api';
+import { loginUser } from '@api';
 
 import FullBtn from '@components/FullBtn';
-// import notValid from '@helper/notValid';
-// import validUser from '@helper/validUser';
+import notValid from '@helper/notValid';
+import validUser from '@helper/validUser';
 
 import '../server';
 
@@ -20,31 +22,49 @@ export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get('email');
   const password = formData.get('password');
+  const url = new URL(request.url);
+  const path = url.searchParams.get('path');
 
-  console.log(email, password);
+  try {
+    const values = { email, password };
+    await notValid(values);
+    const user = await loginUser(values);
+    const pathUrl = await validUser(user, path);
+    return pathUrl;
+  } catch (e) {
+    console.log(e.message);
+  }
+
   return null;
 }
 
 export default function LoginPage() {
   const message = useLoaderData();
+  const path = useActionData();
+  const navigate = useNavigate();
+
   // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = useState(() => 'idle');
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(() => null);
-  const [formValue, setFormValue] = useState(() => ({ email: '', password: '' }));
-  // const navigate = useNavigate();
   const isDisable = status === 'idle';
 
-  function handleInputChange(event) {
-    const { target } = event;
-    const { value } = target;
-    const { name } = target;
+  useEffect(() => {
+    if (path) {
+      navigate(path);
+    }
+  }, [path, navigate]);
 
-    setFormValue((prevValue) => ({
-      ...prevValue,
-      [name]: value,
-    }));
-  }
+  // function handleInputChange(event) {
+  //   const { target } = event;
+  //   const { value } = target;
+  //   const { name } = target;
+
+  //   setFormValue((prevValue) => ({
+  //     ...prevValue,
+  //     [name]: value,
+  //   }));
+  // }
 
   // async function handleSubmit(event) {
   //   event.preventDefault();
@@ -104,16 +124,12 @@ export default function LoginPage() {
           placeholder="Email address"
           className="w-full p-2 focus:border rounded-md shadow-btnShadow outline-none mb-1"
           name="email"
-          onChange={handleInputChange}
-          value={formValue.email}
         />
         <input
           type="password"
           placeholder="Password"
           className="w-full p-2 focus:border rounded-md shadow-btnShadow outline-none mb-8"
           name="password"
-          onChange={handleInputChange}
-          value={formValue.password}
           autoComplete="on"
         />
         <FullBtn

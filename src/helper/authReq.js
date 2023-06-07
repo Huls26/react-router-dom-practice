@@ -1,5 +1,5 @@
 export default async function authReq() {
-  const isLoggedIn = false;
+  const isLoggedIn = localStorage.getItem('loggedIn');
 
   return isLoggedIn;
 }

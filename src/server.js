@@ -35,7 +35,8 @@ createServer({
     this.logging = false;
     // this.timing = 2000
 
-    this.get('/vans', (schema) =>
+    // eslint-disable-next-line no-unused-vars
+    this.get('/vans', (schema, request) =>
     // return new Response(400, {}, {error: "Error fetching data"})
       // eslint-disable-next-line implicit-arrow-linebreak
       schema.vans.all());
@@ -45,7 +46,8 @@ createServer({
       return schema.vans.find(id);
     });
 
-    this.get('/host/vans', (schema) =>
+    // eslint-disable-next-line no-unused-vars
+    this.get('/host/vans', (schema, request) =>
     // Hard-code the hostId for now
       // eslint-disable-next-line implicit-arrow-linebreak
       schema.vans.where({ hostId: '123' }));

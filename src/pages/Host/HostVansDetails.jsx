@@ -9,7 +9,8 @@ export async function loader({ params }) {
   const user = await authReq();
 
   if (user) {
-    const [vansDetail] = await getHostVansDetail(params.id);
+    const vansDetail = await getHostVansDetail(params.id);
+    console.log(vansDetail);
     return { vansDetail, user };
   }
 

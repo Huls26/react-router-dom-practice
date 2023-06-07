@@ -14,7 +14,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!data) {
-      navigate('/login?message=You must log in first.', { replace: true });
+      navigate('/login?message=You must log in first.&path=host', { replace: true });
     }
   }, [data, navigate]);
 
