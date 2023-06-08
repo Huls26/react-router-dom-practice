@@ -68,6 +68,17 @@ export default function Header() {
               <img src={icon} alt="icon" />
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/"
+              className={
+                ({ isActive }) => (isActive ? activeStyle : hoverStyle)
+              }
+              onClick={() => localStorage.clear()}
+            >
+              logout
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>

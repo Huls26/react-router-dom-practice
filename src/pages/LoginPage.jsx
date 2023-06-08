@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Form, useActionData, useLoaderData, useNavigate,
 } from 'react-router-dom';
@@ -23,35 +23,36 @@ export async function action({ request }) {
   const email = formData.get('email');
   const password = formData.get('password');
   const url = new URL(request.url);
-  const path = url.searchParams.get('path');
+  const params = url.searchParams.get('path');
 
-  try {
-    const values = { email, password };
-    await notValid(values);
+  const values = { email, password };
+  const isNotValid = await notValid(values);
+
+  if (!isNotValid) {
     const user = await loginUser(values);
-    const pathUrl = await validUser(user, path);
-    return pathUrl;
-  } catch (e) {
-    console.log(e.message);
+    const { path, error } = await validUser(user, params);
+
+    return { path, error };
   }
 
-  return null;
+  return { path: null, error: isNotValid };
 }
 
 export default function LoginPage() {
   const message = useLoaderData();
-  const path = useActionData();
+  const actionData = useActionData();
+  const { path, error } = { ...actionData };
   const navigate = useNavigate();
 
   // eslint-disable-next-line no-unused-vars
-  const [status, setStatus] = useState(() => 'idle');
+  // const [status, setStatus] = useState(() => 'idle');
   // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState(() => null);
-  const isDisable = status === 'idle';
+  // const [error, setError] = useState(() => null);
+  // const isDisable = status === 'idle';
 
   useEffect(() => {
     if (path) {
-      navigate(path);
+      navigate(path, { replace: true });
     }
   }, [path, navigate]);
 
@@ -135,7 +136,7 @@ export default function LoginPage() {
         <FullBtn
           bg="orange"
           text="sign in"
-          isDisable={!isDisable}
+          isDisable={false}
         />
       </Form>
 

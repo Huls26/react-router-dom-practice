@@ -30,7 +30,7 @@ export async function loginUser(creds) {
 
   if (!res.ok) {
     // eslint-disable-next-line no-throw-literal
-    throw {
+    return {
       message: data.message,
       statusText: res.statusText,
       status: res.status,
