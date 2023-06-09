@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {
-  Form, useActionData, useLoaderData, useNavigate,
+  Form, useActionData, useLoaderData, useNavigate, useNavigation,
 } from 'react-router-dom';
 
 import { loginUser } from '@api';
@@ -43,6 +43,8 @@ export default function LoginPage() {
   const actionData = useActionData();
   const { path, error } = { ...actionData };
   const navigate = useNavigate();
+  const { state } = useNavigation();
+  const btnLoginLoading = state !== 'idle' ? 'Logging in...' : 'Login';
 
   // eslint-disable-next-line no-unused-vars
   // const [status, setStatus] = useState(() => 'idle');
@@ -135,8 +137,8 @@ export default function LoginPage() {
         />
         <FullBtn
           bg="orange"
-          text="sign in"
-          isDisable={false}
+          text={btnLoginLoading}
+          isDisable={(state !== 'idle')}
         />
       </Form>
 
