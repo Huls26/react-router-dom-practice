@@ -1,5 +1,11 @@
-export default async function authReq() {
+export default async function authReq(request) {
   const isLoggedIn = localStorage.getItem('loggedIn');
 
-  return isLoggedIn;
+  if (!isLoggedIn) {
+    const { pathname } = new URL(request.url);
+
+    return pathname;
+  }
+
+  return !isLoggedIn;
 }

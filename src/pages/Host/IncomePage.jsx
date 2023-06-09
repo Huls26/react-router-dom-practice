@@ -2,21 +2,24 @@ import { useEffect } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import authReq from '@helper/authReq';
 
-export async function loader() {
-  const user = await authReq();
+export async function loader({ request }) {
+  const user = await authReq(request);
 
-  return user ? 'something' : user;
+  return user;
 }
 
 export default function IncomePage() {
   const navigate = useNavigate();
-  const data = useLoaderData();
+  const pathname = useLoaderData();
 
   useEffect(() => {
-    if (!data) {
-      navigate('/login?message=You must log in first.', { replace: true });
+    if (pathname) {
+      navigate(
+        `/login?message=You must log in first.&redirectTo=${pathname}`,
+        { replace: true },
+      );
     }
-  }, [data, navigate]);
+  }, [pathname, navigate]);
 
   return (
     <div> this IncomePage</div>

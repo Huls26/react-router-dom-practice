@@ -7,10 +7,9 @@ export default function validUser(userRes, path) {
   if (token) {
     console.log(`welcome ${user.name} successful login`);
     localStorage.setItem('loggedIn', true);
-    const setPath = path || 'host';
-    const p = `/${setPath}`;
+    const setPath = path || '/host';
 
-    return { path: p, error: null };
+    return { path: setPath, error: null };
   } if (status > 200) {
     return { path: null, error: 'Something went wrong try again?' };
   }

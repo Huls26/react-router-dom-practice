@@ -23,7 +23,7 @@ export async function action({ request }) {
   const email = formData.get('email');
   const password = formData.get('password');
   const url = new URL(request.url);
-  const params = url.searchParams.get('path');
+  const params = url.searchParams.get('redirectTo');
 
   const values = { email, password };
   const isNotValid = await notValid(values);
@@ -52,6 +52,7 @@ export default function LoginPage() {
   // const [error, setError] = useState(() => null);
   // const isDisable = status === 'idle';
 
+  console.log(path);
   useEffect(() => {
     if (path) {
       navigate(path, { replace: true });

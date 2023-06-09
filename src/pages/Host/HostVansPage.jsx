@@ -8,8 +8,10 @@ import authReq from '@helper/authReq';
 
 import '../../server';
 
-export async function loader() {
-  const user = await authReq();
+// fix
+// add a previous pathname
+export async function loader({ request }) {
+  const user = await authReq(request);
 
   if (user) {
     const vansList = await getHostVans();
