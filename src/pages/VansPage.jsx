@@ -1,15 +1,21 @@
 // import { useState, useEffect } from 'react';
-import { Link, useSearchParams, useLoaderData } from 'react-router-dom';
-import ProductVans from '@features/ProductVans';
+import {
+  // Link,
+  Await,
+  defer,
+  useSearchParams,
+  useLoaderData,
+} from 'react-router-dom';
+// import ProductVans from '@features/ProductVans';
+import MapProductList from '@features/MapProductList';
 import BtnType from '@features/ProductVans/components/BtnType';
 
 import { getVans } from '@api';
 
-export function loader() {
-  const vans = getVans();
+export async function loader() {
+  const vansPromise = getVans();
 
-  // i directly use the api fetch
-  return vans;
+  return defer({ vans: vansPromise });
 }
 
 export default function VansPage() {
@@ -18,33 +24,35 @@ export default function VansPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get('type');
 
-  const data = useLoaderData();
+  const { vans } = useLoaderData();
+  // const data = [vans, searchParams, setSearchParams];
+  const data = vans;
 
-  const filterProduct = typeFilter ? [...data]
-    .filter((van) => (van.type.toLowerCase() === typeFilter))
-    : [...data];
+  // const filterProduct = typeFilter ? [...data]
+  //   .filter((van) => (van.type.toLowerCase() === typeFilter))
+  //   : [...data];
 
-  const productList = filterProduct.map(({
-    imageUrl, name, price, type, id,
-  }) => (
-    <Link
-      to={`${id}`}
-      key={id}
-      state={{
-        search: searchParams.toString(),
-        type: typeFilter,
-      }}
-    >
-      <ProductVans
-        img={imageUrl}
-        name={name}
-        price={price}
-        type={type}
-        id={id}
-      />
-    </Link>
+  // const productList = filterProduct.map(({
+  //   imageUrl, name, price, type, id,
+  // }) => (
+  //   <Link
+  //     to={`${id}`}
+  //     key={id}
+  //     state={{
+  //       search: searchParams.toString(),
+  //       type: typeFilter,
+  //     }}
+  //   >
+  //     <ProductVans
+  //       img={imageUrl}
+  //       name={name}
+  //       price={price}
+  //       type={type}
+  //       id={id}
+  //     />
+  //   </Link>
 
-  ));
+  // ));
 
   function handleSearchParams(key, value) {
     setSearchParams((prevParams) => {
@@ -111,9 +119,20 @@ export default function VansPage() {
       {
       // flex justify-center flex-wrap gap-8
       }
-      <div className="grid md:grid-cols-[230px_230px] lg:grid-cols-[230px_230px_230px] xl:grid-cols-[230px_230px_230px_230px] justify-center gap-8">
+      {
+        /* <div className="grid md:grid-cols-[230px_230px]
+        lg:grid-cols-[230px_230px_230px]
+        xl:grid-cols-[230px_230px_230px_230px] justify-center gap-8">
         {productList}
-      </div>
+      </div> */}
+
+      <Await
+        resolve={data}
+      >
+        {
+          (dataArray) => <MapProductList data={dataArray} />
+        }
+      </Await>
 
     </section>
   );

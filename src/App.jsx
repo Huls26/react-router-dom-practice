@@ -12,7 +12,7 @@ import LoginPage, { loader as loginPageLoader, action as LoginPageAction } from 
 import HomePage from '@pages/HomePage';
 import AboutPage from '@pages/AboutPage';
 import VansPage, {
-// loader as vansLoader,
+  loader as vansLoader,
 } from '@pages/VansPage';
 import VanDetailsPage from '@pages/VanDetailsPage';
 import ErrorPage from '@pages/ErrorPage';
@@ -28,7 +28,7 @@ import HostVansDetailChild from '@pages/Host/Vans/HostVansDetailChild';
 import HostVansPhotosChild from '@pages/Host/Vans/HostVansPhotosChild';
 import HostVansPricingChild from '@pages/Host/Vans/HostVansPricingChild';
 
-import { getVans } from './api';
+// import { getVans } from './api';
 // import { authReq } from './helper/authReq';
 
 // const router = createBrowserRouter([
@@ -94,7 +94,7 @@ const router = createBrowserRouter(
       <Route
         path="vans"
         element={<VansPage />}
-        loader={getVans}
+        loader={vansLoader}
         errorElement={<ErrorPage />}
       />
       <Route

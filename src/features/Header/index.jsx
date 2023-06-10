@@ -71,9 +71,10 @@ export default function Header() {
           <li>
             <NavLink
               to="/"
-              className={
-                ({ isActive }) => (isActive ? activeStyle : hoverStyle)
-              }
+              // className={
+              //   ({ isActive }) => (isActive ? activeStyle : hoverStyle)
+              // }
+              className={hoverStyle}
               onClick={() => localStorage.clear()}
             >
               logout
