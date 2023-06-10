@@ -11,25 +11,28 @@ import '../../server';
 // fix
 // add a previous pathname
 export async function loader({ request }) {
-  const user = await authReq(request);
+  const pathname = await authReq(request);
 
-  if (user) {
+  if (!pathname) {
     const vansList = await getHostVans();
-    return { vansList, user };
+    return { vansList, pathname };
   }
 
-  return { vansList: [], user };
+  return { vansList: [], pathname };
 }
 
 export default function HostVansPage() {
-  const { vansList, user } = useLoaderData();
+  const { vansList, pathname } = useLoaderData();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login?message=You must log in first.', { replace: true });
+    if (pathname) {
+      navigate(
+        `/login?message=You must log in first.&redirectTo=${pathname}`,
+        { replace: true },
+      );
     }
-  }, [user, navigate]);
+  }, [pathname, navigate]);
 
   const mapVansList = vansList.map((vans) => (
     <HostVansArticle

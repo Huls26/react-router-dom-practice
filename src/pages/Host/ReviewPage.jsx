@@ -2,25 +2,28 @@ import { useEffect } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import authReq from '@helper/authReq';
 
-export async function loader() {
-  const user = await authReq();
+export async function loader({ request }) {
+  const pathname = await authReq(request);
 
-  if (user) {
-    return { data: ['something'], user };
+  if (!pathname) {
+    return { data: ['something'], pathname };
   }
 
-  return { data: [''], user };
+  return { data: [''], pathname };
 }
 
 export default function ReviewPage() {
   const navigate = useNavigate();
-  const { data, user } = useLoaderData();
+  const { data, pathname } = useLoaderData();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login?message=You must log in first.', { replace: true });
+    if (pathname) {
+      navigate(
+        `/login?message=You must log in first.&redirectTo=${pathname}`,
+        { replace: true },
+      );
     }
-  }, [user, navigate]);
+  }, [pathname, navigate]);
 
   return (
     <div>{data}</div>

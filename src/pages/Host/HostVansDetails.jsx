@@ -5,27 +5,29 @@ import HostVansDetailArticle from '@features/HostVansDetailArticle';
 import { getHostVansDetail } from '@api';
 import authReq from '@helper/authReq';
 
-export async function loader({ params }) {
-  const user = await authReq();
+export async function loader({ params, request }) {
+  const pathname = await authReq(request);
 
-  if (user) {
+  if (!pathname) {
     const vansDetail = await getHostVansDetail(params.id);
-    console.log(vansDetail);
-    return { vansDetail, user };
+    return { vansDetail, pathname };
   }
 
-  return { vansList: [], user };
+  return { vansList: [], pathname };
 }
 
 export default function HostVansDetails() {
-  const { vansDetail, user } = useLoaderData();
+  const { vansDetail, pathname } = useLoaderData();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login?message=You must log in first.', { replace: true });
+    if (pathname) {
+      navigate(
+        `/login?message=You must log in first.&redirectTo=${pathname}`,
+        { replace: true },
+      );
     }
-  }, [user, navigate]);
+  }, [pathname, navigate]);
 
   // const [vansDetail, setVansDetail] = useState(() => {});
   // const { id } = useParams();
