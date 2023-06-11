@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -32,9 +33,12 @@ export default function MapProductList({ data }) {
     </Link>
 
   ));
+
   return (
     <div className="grid md:grid-cols-[230px_230px] lg:grid-cols-[230px_230px_230px] xl:grid-cols-[230px_230px_230px_230px] justify-center gap-8">
-      {productList}
+      <Suspense fallback={<h1 className="text-center font-bold text-xl">...Loading</h1>}>
+        {productList}
+      </Suspense>
     </div>
   );
 }

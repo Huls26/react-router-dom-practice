@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import {
   // Link,
   Await,
@@ -125,15 +125,15 @@ export default function VansPage() {
         xl:grid-cols-[230px_230px_230px_230px] justify-center gap-8">
         {productList}
       </div> */}
-
-      <Await
-        resolve={data}
-      >
-        {
+      <Suspense fallback={<h1 className="text-center font-bold text-xl">...Loading</h1>}>
+        <Await
+          resolve={data}
+        >
+          {
           (dataArray) => <MapProductList data={dataArray} />
         }
-      </Await>
-
+        </Await>
+      </Suspense>
     </section>
   );
 }
