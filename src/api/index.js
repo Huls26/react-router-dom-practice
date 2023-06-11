@@ -2,6 +2,14 @@ import '../server';
 
 export async function getVans() {
   const res = await fetch('/api/vans');
+  const errorD = {
+    message: 'Failed to fetch vans',
+    statusText: res.statusText,
+    status: res.status,
+  };
+  if (!res.ok) {
+    throw errorD;
+  }
   const { vans } = await res.json();
 
   return vans;
@@ -10,6 +18,14 @@ export async function getVans() {
 export async function getVanDetails(id) {
   const url = `/api/vans/${id}`;
   const res = await fetch(url);
+  const errorD = {
+    message: 'Failed to fetch vans',
+    statusText: res.statusText,
+    status: res.status,
+  };
+  if (!res.ok) {
+    throw errorD;
+  }
   const { vans } = await res.json();
 
   return vans;
@@ -17,6 +33,14 @@ export async function getVanDetails(id) {
 
 export async function getHostVans() {
   const res = await fetch('/api/host/vans');
+  const errorD = {
+    message: 'Failed to fetch vans',
+    statusText: res.statusText,
+    status: res.status,
+  };
+  if (!res.ok) {
+    throw errorD;
+  }
   const { vans } = await res.json();
 
   return vans;
@@ -24,6 +48,14 @@ export async function getHostVans() {
 
 export async function getHostVansDetail(id) {
   const res = await fetch(`/api/host/vans/${id}`);
+  const errorD = {
+    message: 'Failed to fetch vans',
+    statusText: res.statusText,
+    status: res.status,
+  };
+  if (!res.ok) {
+    throw errorD;
+  }
   const { vans } = await res.json();
 
   return vans;
@@ -34,16 +66,15 @@ export async function loginUser(creds) {
     '/api/login',
     { method: 'post', body: JSON.stringify(creds) },
   );
-  const data = await res.json();
-
+  const errorD = {
+    message: 'Failed to fetch vans',
+    statusText: res.statusText,
+    status: res.status,
+  };
   if (!res.ok) {
-    // eslint-disable-next-line no-throw-literal
-    return {
-      message: data.message,
-      statusText: res.statusText,
-      status: res.status,
-    };
+    throw errorD;
   }
+  const data = await res.json();
 
   return data;
 }

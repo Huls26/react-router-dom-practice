@@ -12,6 +12,8 @@ import BtnType from '@features/ProductVans/components/BtnType';
 
 import { getVans } from '@api';
 
+import '../server';
+
 export async function loader() {
   const vansPromise = getVans();
 
