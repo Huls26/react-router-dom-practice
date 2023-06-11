@@ -1,5 +1,11 @@
-import { useEffect } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import {
+  Suspense,
+  useEffect,
+  // Suspense,
+} from 'react';
+import {
+  Await, defer, useLoaderData, useNavigate,
+} from 'react-router-dom';
 
 import HostVansDetailArticle from '@features/HostVansDetailArticle';
 import { getHostVansDetail } from '@api';
@@ -9,8 +15,8 @@ export async function loader({ params, request }) {
   const pathname = await authReq(request);
 
   if (!pathname) {
-    const vansDetail = await getHostVansDetail(params.id);
-    return { vansDetail, pathname };
+    const vansDetail = getHostVansDetail(params.id);
+    return defer({ vansDetail, pathname });
   }
 
   return { vansList: [], pathname };
@@ -42,17 +48,24 @@ export default function HostVansDetails() {
   //     }));
   // }, [id]);
 
+  function renderVanDetail(vansDetailPromise) {
+    return (
+      <HostVansDetailArticle
+        type={vansDetailPromise.type}
+        img={vansDetailPromise.imageUrl}
+        name={vansDetailPromise.name}
+        price={vansDetailPromise.price}
+        id={vansDetailPromise.id}
+        description={vansDetailPromise.description}
+      />
+    );
+  }
+
   return (
-    vansDetail
-    && (
-    <HostVansDetailArticle
-      type={vansDetail.type}
-      img={vansDetail.imageUrl}
-      name={vansDetail.name}
-      price={vansDetail.price}
-      id={vansDetail.id}
-      description={vansDetail.description}
-    />
-    )
+    <Suspense fallback={<h1 className="text-center font-bold text-xl">...Loading</h1>}>
+      <Await resolve={vansDetail}>
+        {renderVanDetail}
+      </Await>
+    </Suspense>
   );
 }

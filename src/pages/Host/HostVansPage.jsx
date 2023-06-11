@@ -70,7 +70,6 @@ export default function HostVansPage() {
           </Await>
         </Suspense>
       </div>
-
     </section>
   );
 }

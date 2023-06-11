@@ -7,6 +7,14 @@ export async function getVans() {
   return vans;
 }
 
+export async function getVanDetails(id) {
+  const url = `/api/vans/${id}`;
+  const res = await fetch(url);
+  const { vans } = await res.json();
+
+  return vans;
+}
+
 export async function getHostVans() {
   const res = await fetch('/api/host/vans');
   const { vans } = await res.json();

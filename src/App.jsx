@@ -14,7 +14,7 @@ import AboutPage from '@pages/AboutPage';
 import VansPage, {
   loader as vansLoader,
 } from '@pages/VansPage';
-import VanDetailsPage from '@pages/VanDetailsPage';
+import VanDetailsPage, { loader as vanDetailsPageLoader } from '@pages/VanDetailsPage';
 import ErrorPage from '@pages/ErrorPage';
 
 import HostLayout from '@pages/Host/HostLayout';
@@ -100,6 +100,7 @@ const router = createBrowserRouter(
       <Route
         path="vans/:id"
         element={<VanDetailsPage />}
+        loader={vanDetailsPageLoader}
       />
 
       <Route

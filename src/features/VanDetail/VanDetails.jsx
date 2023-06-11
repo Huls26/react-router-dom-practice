@@ -9,6 +9,7 @@ export default function VanDetails({ info }) {
   const {
     imageUrl, type, price, name, description,
   } = info;
+  console.log(info);
   const { state } = useLocation();
   const linkTo = state.search ? `..?${state.search}` : '..';
 
