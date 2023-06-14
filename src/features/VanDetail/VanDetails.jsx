@@ -10,11 +10,11 @@ export default function VanDetails({ info }) {
     imageUrl, type, price, name, description,
   } = info;
   const { state } = useLocation();
-  const linkTo = state.search ? `..?${state.search}` : '..';
+  const linkTo = state ? `..?${state.search}` : '..';
 
   return (
     <section className="bg-white px-6 pt-10 pb-20">
-      <BackArrow link={linkTo} type={state.type || ''} />
+      <BackArrow link={linkTo} type={(state && state.type) || ''} />
 
       <div className="flex flex-col md:flex-row md:space-x-7">
         <div className="w-full h-1/2 mb-12 rounded md:basis-1/2">
